@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">ContactosSQLITE</string>
+    <string name="saludo">SQLITE Android</string>
+    <string name="ncontrol">N Control</string>
+    <string name="nombre">Nombre(s)</string>
+    <string name="apes">Apellido(s)</string>
+    <string name="carrera">Carrera</string>
+    <string name="edad">Edad</string>
+    <string name="estatura">Estatura</string>
+    <string name="peso">Peso</string>
+    <string name="desc">Descripcion</string>
+    <string name="guardar">Guardar</string>
+    <string name="ir">Ver</string>
+    <string name="ver">Ver Datos</string>
+</resources>
