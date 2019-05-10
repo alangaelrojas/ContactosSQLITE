@@ -84,6 +84,5 @@ class DataBaseHelper extends SQLiteOpenHelper {
         else {
             return true;
         }
-
     }
 }
