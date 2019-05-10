@@ -2,15 +2,16 @@ package com.alan.moviles.contactossqlite;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
+import android.util.Log;
 
 class DataBaseHelper extends SQLiteOpenHelper {
 
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "contactDB.db";
-
 
     public static class Contacts implements BaseColumns {
         public static final String TABLE_NAME = "contact_table";
@@ -41,6 +42,10 @@ class DataBaseHelper extends SQLiteOpenHelper {
 
     private static final String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + Contacts.TABLE_NAME;
+
+
+    private static final String SQL_READ_QUERY  =
+            "SELECT * FROM "+ Contacts.TABLE_NAME+" WHERE COL_ID == ";
 
 
 
@@ -84,5 +89,50 @@ class DataBaseHelper extends SQLiteOpenHelper {
         else {
             return true;
         }
+    }
+
+    public Boolean updateData(int ncontrol, String name, String surname, String age, String career, String weigth, String heigth, String description) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(Contacts.COL_NAME, name);
+        contentValues.put(Contacts.COL_SUR, surname);
+        contentValues.put(Contacts.COL_CAREER, career);
+        contentValues.put(Contacts.COL_AGE, age);
+        contentValues.put(Contacts.COL_WEIGTH, weigth);
+        contentValues.put(Contacts.COL_HEIGTH, heigth);
+        contentValues.put(Contacts.COL_DESC, description);
+
+        String[] selectionArgs = {String.valueOf(ncontrol)};
+
+        long result = db.update(Contacts.TABLE_NAME, contentValues, "_ncontrol =?", selectionArgs);
+        db.close();
+
+        if(result > 0 ){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public Cursor readData(int ncontro){
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String[] columns = {"_name", "_surname", "_career", "_age", "_heitgh", "_weigth", "_description"};
+        String selection = "_ncontrol = ?";
+        String[] selectionArgs = {String.valueOf(ncontro)};
+        Cursor cursor = db.query(Contacts.TABLE_NAME, columns, selection, selectionArgs , null, null, null, null);
+
+        Log.i("cursor", cursor.getColumnNames().toString());
+
+        return cursor;
+    }
+
+    public Integer deleteData(int ncontro){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String[] selectionArgs = {String.valueOf(ncontro)};
+        int i  = db.delete(Contacts.TABLE_NAME, "_ncontrol =?", selectionArgs);
+        return i;
     }
 }
