@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "48022834270",
+    "firebase_url": "https://contactos-e4a52.firebaseio.com",
+    "project_id": "contactos-e4a52",
+    "storage_bucket": "contactos-e4a52.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:48022834270:android:b34d7748d410f725",
+        "android_client_info": {
+          "package_name": "com.alan.moviles.contactossqlite"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "48022834270-9rv0njb50ivgui3i327ceoquudcm6ui3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCk8K00wpHgHeUH8iKXri9CGUthmBHR_t4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "48022834270-9rv0njb50ivgui3i327ceoquudcm6ui3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
