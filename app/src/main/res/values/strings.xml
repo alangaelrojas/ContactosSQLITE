@@ -12,4 +12,5 @@
     <string name="guardar">Guardar</string>
     <string name="ir">Ver</string>
     <string name="ver">Ver Datos</string>
+    <string name="defaultName">Lorem Ipsum</string>
 </resources>
