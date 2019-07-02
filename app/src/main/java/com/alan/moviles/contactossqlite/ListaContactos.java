@@ -8,6 +8,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -18,6 +20,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.alan.moviles.contactossqlite.Pojo.AdapterContactos;
 
@@ -32,6 +36,7 @@ public class ListaContactos extends AppCompatActivity implements AdapterContacto
 
     RecyclerView rvContactos;
     FloatingActionButton fabButton;
+    ImageView connection;
     //creacion de variables de Firebase
     FirebaseDatabase database;
     DatabaseReference databaseReference;
@@ -42,12 +47,28 @@ public class ListaContactos extends AppCompatActivity implements AdapterContacto
     String mensaje_contenido;
 
 
+    Boolean connect;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_contactos);
         rvContactos = findViewById(R.id.recyclerView);
         fabButton = findViewById(R.id.fab);
+        connection = findViewById(R.id.offline);
+        connect = isOnline(getApplicationContext());
+        enablePersistence();
+
+        Toast.makeText(this, connect.toString(), Toast.LENGTH_SHORT).show();
+
+
+        if(connect){
+            connection.setVisibility(View.GONE);
+            connection.setVisibility(View.INVISIBLE);
+        }else{
+            connection.setVisibility(View.VISIBLE);
+        }
 
         fabButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,5 +149,14 @@ public class ListaContactos extends AppCompatActivity implements AdapterContacto
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    public static boolean isOnline(Context context) {
+        ConnectivityManager connectivityManager = (ConnectivityManager)
+                context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        return networkInfo != null && networkInfo.isConnected();
+    }
+    private void enablePersistence() {
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
     }
 }
